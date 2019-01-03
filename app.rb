@@ -23,10 +23,5 @@ end
 
 # An endpoint to inspect application state externally.
 get '/info' do
-	{environment: Sinatra::Application.environment, sha: env['SOURCE_VERSION']}
-end
-
-# An endpoint just for the tests.
-get '/error' do
-	xyzzy.inspect
+	{environment: Sinatra::Application.environment, sha: env['HEROKU_SLUG_COMMIT']}
 end
