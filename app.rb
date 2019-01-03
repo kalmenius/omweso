@@ -23,6 +23,5 @@ end
 
 # An endpoint to inspect application state externally.
 get '/info' do
-	puts env.inspect
-	{environment: Sinatra::Application.environment, sha: env['HEROKU_SLUG_COMMIT']}
+	{environment: Sinatra::Application.environment, sha: ENV['HEROKU_SLUG_COMMIT']}
 end
