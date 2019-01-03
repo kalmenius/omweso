@@ -5,7 +5,7 @@ describe "Omweso" do
 		expect(last_response.body).to eq("{\"meep\":\"moop\"}")
 	end
 	
-	it "should fail this test now" do
-		fail
+	it "should not fail this test" do
+		# fail
 	end
 end
