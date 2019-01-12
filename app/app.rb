@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/config_file'
+require 'sinatra/json'
 
 config_file '../config/settings.yml'
 
@@ -18,8 +19,7 @@ end
 
 # JSON-ify all responses.
 after do
-	content_type :json
-	body body.to_json
+	body json body
 end
 
 # Handle bad routes nicely.
