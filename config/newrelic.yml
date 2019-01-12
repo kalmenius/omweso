@@ -1,5 +1,5 @@
 common: &default_settings
-  license_key: 39163f4b6838580879b68387c17c68afbb66f336
+  license_key: '<%= ENV["NEW_RELIC_LICENSE_KEY"] %>'
   app_name: Omweso
   agent_enabled: false
   log_level: info
