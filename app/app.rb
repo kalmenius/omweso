@@ -36,6 +36,15 @@ configure :test do
 	end
 end
 
+# Monkey-patching Ougai for more sensible log levels.
+module Ougai
+	module Formatters::ForJson
+		def to_level(severity)
+			severity
+		end
+	end
+end
+
 # An alias for request-scoped data storage.
 def rq
 	RequestStore.store
