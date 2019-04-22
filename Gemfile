@@ -1,20 +1,22 @@
-ruby '2.6.1'
+ruby '2.6.2'
 source :rubygems
 
-gem 'sinatra'
-gem 'sinatra-contrib'
+gem 'ougai'
+gem 'pg'
 gem 'puma'
 gem 'rack-request-id'
 gem 'request_store'
-gem 'ougai'
+gem 'sequel'
+gem 'sinatra'
+gem 'sinatra-contrib'
 
 group :development do
 	gem 'awesome_print'
 end
 
 group :test do
-	gem 'rake'
 	gem 'rack-test'
+	gem 'rake'
 	gem 'rspec'
 end
 
