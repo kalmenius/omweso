@@ -10,6 +10,7 @@ GEM
     oj (3.7.12)
     ougai (1.7.1)
       oj (~> 3.4)
+    pg (1.1.4)
     pg (1.1.4-x64-mingw32)
     puma (3.12.1)
     rack (2.0.7)
@@ -50,7 +51,9 @@ GEM
     tilt (2.0.9)
 
 PLATFORMS
+  ruby
   x64-mingw32
+  x86_64-linux
 
 DEPENDENCIES
   awesome_print
