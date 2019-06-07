@@ -7,6 +7,7 @@ gem 'puma'
 gem 'rack-request-id'
 gem 'request_store'
 gem 'sequel'
+gem 'sequel-rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
