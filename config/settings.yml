@@ -2,10 +2,12 @@ development:
   name: omweso-dev
   log_level: trace
   pretty_logs: true
+  database: postgres://omweso:mancala@localhost/omweso_dev
 test:
   name: omweso-test
   log_level: fatal
   pretty_logs: false
+  database: postgres://omweso:mancala@localhost/omweso_test
 production:
   name: omweso-prod
   log_level: info

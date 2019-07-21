@@ -5,8 +5,14 @@ require 'sinatra/json'
 require 'ougai'
 require 'rack-request-id'
 require 'request_store'
+require 'sequel'
 
 config_file File.expand_path('../config/settings.yml', __dir__)
+
+# An alias for request-scoped data storage.
+def rq
+	RequestStore.store
+end
 
 # Adjust global Sinatra settings.
 configure do
@@ -27,6 +33,8 @@ configure do
 		name: settings.name
 	}
 	set :logger, logger
+
+	DB = Sequel.connect(production? ? ENV['DATABASE_URL'] : settings.database, logger: logger.child(logger: 'sequel'))
 end
 
 # Adjust test-environment-only settings.
@@ -43,11 +51,6 @@ module Ougai
 			severity
 		end
 	end
-end
-
-# An alias for request-scoped data storage.
-def rq
-	RequestStore.store
 end
 
 # Store some request-scoped information and log.
@@ -86,7 +89,9 @@ end
 # An endpoint to inspect application state externally.
 get '/info' do
 	{
+		database: DB['SELECT version()'].first[:version],
 		environment: Sinatra::Application.environment,
+		name: settings.name,
 		sha: ENV['HEROKU_SLUG_COMMIT']
 	}
 end

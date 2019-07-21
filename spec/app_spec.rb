@@ -5,6 +5,14 @@ describe "Omweso" do
 		it "with the Sinatra environment" do
 			expect(@json["environment"]).to eq "test"
 		end
+
+		it "with a name from the config file" do
+			expect(@json["name"]).to eq "omweso-test"
+		end
+
+		it "with the database version" do
+			expect(@json["database"]).to start_with "PostgreSQL 11.4"
+		end
 	end
 
 	context "should handle bad routes" do
