@@ -27,3 +27,6 @@ services:
   - rabbitmq
 addons:
   postgresql: "11.4"
+  apt:
+    packages:
+      - rabbitmq-server
