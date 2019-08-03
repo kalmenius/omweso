@@ -28,7 +28,7 @@ describe "Omweso" do
 			end
 
 			it "including the version" do
-				expect(@amqp["version"]).to eq "3.7.17"
+				expect(@amqp["version"]).to start_with "3."
 			end
 		end
 	end
