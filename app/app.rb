@@ -35,9 +35,18 @@ configure do
 	}
 	set :logger, logger
 
+	logger.info "Establishing database connection..."
 	DB = Sequel.connect(production? ? ENV['DATABASE_URL'] : settings.database, logger: logger.child(logger: 'sequel'))
+
+	logger.info "Establishing AMQP connection..."
 	AMQP = Bunny.new(production? ? ENV['CLOUDAMQP_URL'] : nil, {logger: logger.child(logger: 'bunny')})
 	AMQP.start
+
+	# Finally, we register all controller classes.
+	Dir.glob('./app/controllers/*.rb').each do |file|
+		logger.info "Registering controller #{File.basename(file)}"
+		require file
+	end
 end
 
 # Adjust test-environment-only settings.
