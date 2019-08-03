@@ -1,6 +1,7 @@
 ruby '2.6.3'
 source :rubygems
 
+gem 'bunny'
 gem 'ougai'
 gem 'pg'
 gem 'puma'

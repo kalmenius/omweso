@@ -24,5 +24,6 @@ notifications:
     on_failure: always
 services:
   - postgresql
+  - rabbitmq
 addons:
   postgresql: "11.4"

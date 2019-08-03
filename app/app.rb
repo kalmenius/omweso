@@ -6,6 +6,7 @@ require 'ougai'
 require 'rack-request-id'
 require 'request_store'
 require 'sequel'
+require 'bunny'
 
 config_file File.expand_path('../config/settings.yml', __dir__)
 
@@ -27,7 +28,7 @@ configure do
 	logger = Ougai::Logger.new(STDOUT)
 	logger.level = settings.log_level
 	logger.formatter = Ougai::Formatters::Readable.new if settings.pretty_logs
-	logger.before_log = lambda {|data| data.merge!(rq)}
+	logger.before_log = lambda { |data| data.merge!(rq) }
 	logger.with_fields = {
 		environment: Sinatra::Application.environment,
 		name: settings.name
@@ -35,6 +36,8 @@ configure do
 	set :logger, logger
 
 	DB = Sequel.connect(production? ? ENV['DATABASE_URL'] : settings.database, logger: logger.child(logger: 'sequel'))
+	AMQP = Bunny.new(production? ? ENV['CLOUDAMQP_URL'] : nil, {logger: logger.child(logger: 'bunny')})
+	AMQP.start
 end
 
 # Adjust test-environment-only settings.
@@ -89,6 +92,7 @@ end
 # An endpoint to inspect application state externally.
 get '/info' do
 	{
+		amqp: AMQP.server_properties.merge(status: AMQP.status),
 		database: DB['SELECT version()'].first[:version],
 		environment: Sinatra::Application.environment,
 		name: settings.name,
