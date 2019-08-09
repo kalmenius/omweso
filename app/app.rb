@@ -39,7 +39,7 @@ configure do
 	DB = Sequel.connect(production? ? ENV['DATABASE_URL'] : settings.database, logger: logger.child(logger: 'sequel'))
 
 	logger.info "Establishing AMQP connection..."
-	AMQP = Bunny.new(production? ? ENV['CLOUDAMQP_URL'] : nil, {logger: logger.child(logger: 'bunny')})
+	AMQP = Bunny.new(production? ? ENV['CLOUDAMQP_URL'] : nil, logger: logger.child(logger: 'bunny'))
 	AMQP.start
 
 	# Finally, we register all controller classes.
