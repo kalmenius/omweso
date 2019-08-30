@@ -6,6 +6,7 @@ gem 'ougai'
 gem 'pg'
 gem 'puma'
 gem 'rack-request-id'
+gem 'rake'
 gem 'request_store'
 gem 'sequel'
 gem 'sequel-rake'
@@ -18,7 +19,6 @@ end
 
 group :test do
 	gem 'rack-test'
-	gem 'rake'
 	gem 'rspec'
 	gem 'rubocop'
 end
