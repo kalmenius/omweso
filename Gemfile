@@ -8,6 +8,7 @@ gem 'puma'
 gem 'rack-request-id'
 gem 'rake'
 gem 'request_store'
+gem 'rspec'
 gem 'sequel'
 gem 'sequel-rake'
 gem 'sinatra'
@@ -19,7 +20,6 @@ end
 
 group :test do
 	gem 'rack-test'
-	gem 'rspec'
 	gem 'rubocop'
 end
 
