@@ -15,7 +15,7 @@ end
 
 shared_examples_for "a JSON endpoint" do |code, block|
 	before do
-		instance_exec &block
+		instance_exec(&block)
 		@json = JSON.parse last_response.body
 	end
 
@@ -41,7 +41,7 @@ shared_examples_for "a JSON endpoint" do |code, block|
 		end
 
 		it "that is distinct each time" do
-			instance_exec &block
+			instance_exec(&block)
 			expect(request_id).not_to eq @request_id
 		end
 	end

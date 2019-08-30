@@ -1,5 +1,5 @@
 ruby '2.6.3'
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'bunny'
 gem 'ougai'

@@ -1,0 +1,19 @@
+Layout/EndOfLine:
+  Enabled: false
+Layout/IndentationWidth:
+  Width: 1
+Layout/Tab:
+  Enabled: false
+  IndentationWidth: 2
+Layout/TrailingBlankLines:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false

@@ -28,17 +28,18 @@ configure do
 	logger = Ougai::Logger.new(STDOUT)
 	logger.level = settings.log_level
 	logger.formatter = Ougai::Formatters::Readable.new if settings.pretty_logs
-	logger.before_log = lambda { |data| data.merge!(rq) }
+	logger.before_log = ->(data) { data.merge!(rq) }
 	logger.with_fields = {
 		environment: Sinatra::Application.environment,
 		name: settings.name
 	}
 	set :logger, logger
 
-	logger.info "Establishing database connection..."
+	logger.info 'Establishing database connection...'
 	DB = Sequel.connect(ENV['DATABASE_URL'] || settings.database, logger: logger.child(logger: 'sequel'))
+	Sequel::Model.plugin :json_serializer
 
-	logger.info "Establishing AMQP connection..."
+	logger.info 'Establishing AMQP connection...'
 	AMQP = Bunny.new(ENV['CLOUDAMQP_URL'] || nil, logger: logger.child(logger: 'bunny'))
 	AMQP.start
 
@@ -52,16 +53,14 @@ end
 # Adjust test-environment-only settings.
 configure :test do
 	get '/error' do
-		raise "xyzzy"
+		raise 'xyzzy'
 	end
 end
 
 # Monkey-patching Ougai for more sensible log levels.
-module Ougai
-	module Formatters::ForJson
-		def to_level(severity)
-			severity
-		end
+module Ougai::Formatters::ForJson
+	def to_level(severity)
+		severity
 	end
 end
 
@@ -88,14 +87,14 @@ end
 
 # Handle bad routes nicely.
 not_found do
-	{error: "Route not found: #{rq[:path]}"}
+	{ error: "Route not found: #{rq[:path]}" }
 end
 
 # Handle uncaught errors nicely.
 error do
 	description = env['sinatra.error'].inspect
 	logger.error "Caught error during #{rq[:verb]} '#{rq[:path]}': #{description}", env['sinatra.error']
-	{error: description}
+	{ error: description }
 end
 
 # An endpoint to inspect application state externally.

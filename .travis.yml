@@ -1,5 +1,7 @@
 language: ruby
 rvm: 2.6.3
+env:
+  - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
 before_install:
   - gem update --system
   - gem install bundler
@@ -13,6 +15,10 @@ before_script:
   - psql -c 'CREATE DATABASE omweso_test;' -U postgres
   - psql -c "CREATE USER omweso WITH PASSWORD 'mancala';" -U postgres
   - psql -c "GRANT ALL ON DATABASE omweso_test TO omweso;" -U postgres
+script:
+  - bundle exec rubocop
+  - bundle exec rake sequel:migrate
+  - bundle exec rake
 deploy:
   provider: heroku
   skip_cleanup: true
