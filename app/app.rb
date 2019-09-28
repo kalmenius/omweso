@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/config_file'
 require 'sinatra/custom_logger'
+require 'sinatra/multi_route'
 require 'sinatra/json'
 require 'ougai'
 require 'rack-request-id'
@@ -50,10 +51,14 @@ configure do
 	end
 end
 
-# Adjust test-environment-only settings.
+# Establish some endpoints only needed by the specs.
 configure :test do
 	get '/error' do
 		raise 'xyzzy'
+	end
+
+	route :get, :post, '/body' do
+		@request_body
 	end
 end
 
@@ -64,12 +69,26 @@ module Ougai::Formatters::ForJson
 	end
 end
 
-# Store some request-scoped information and log.
+# An error for request bodies that are not valid JSON.
+class BadRequestBody < StandardError
+	def http_status
+		400
+	end
+end
+
+# Store some request-scoped information, store the request body (complaining if not JSON), and log.
 before do
 	rq[:request_start] ||= Time.now
 	rq[:path] ||= request.fullpath
 	rq[:verb] ||= request.request_method
 	rq[:thread_id] = Thread.current.object_id.to_s(36)
+
+	request.body.rewind
+	begin
+		@request_body = request.body.read.then { |body| body.empty? ? {} : JSON.parse(body, symbolize_names: true) }
+	rescue JSON::JSONError => e
+		raise BadRequestBody, e
+	end
 
 	logger.info "#{rq[:verb]} '#{rq[:path]}' request received"
 end
@@ -85,16 +104,18 @@ after do
 	logger.info "#{rq[:verb]} '#{rq[:path]}' responded with #{rq[:status]} in #{rq[:request_duration]} seconds"
 end
 
-# Handle bad routes nicely.
-not_found do
-	{ error: "Route not found: #{rq[:path]}" }
-end
+# Handle bad routes and uncaught errors nicely.
+error 400..599 do
+	err = env['sinatra.error']
+	route_description = "#{rq[:verb]} '#{rq[:path]}'"
 
-# Handle uncaught errors nicely.
-error do
-	description = env['sinatra.error'].inspect
-	logger.error "Caught error during #{rq[:verb]} '#{rq[:path]}': #{description}", env['sinatra.error']
-	{ error: description }
+	if err.is_a? Sinatra::NotFound
+		{ error: "Route not found: #{route_description}" }
+	else
+		description = err.inspect
+		logger.error "Caught error during #{route_description}: #{description}", err
+		{ error: description }
+	end
 end
 
 # An endpoint to inspect application state externally.
