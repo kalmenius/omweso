@@ -90,7 +90,7 @@ before do
 		raise BadRequestBody, e
 	end
 
-	logger.info "#{rq[:verb]} '#{rq[:path]}' request received"
+	logger.info "#{rq[:verb]} '#{rq[:path]}' request received with body #{@request_body}"
 end
 
 # JSON-ify all responses and log.
