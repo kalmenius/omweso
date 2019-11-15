@@ -32,7 +32,7 @@ services:
   - postgresql
   - rabbitmq
 addons:
-  postgresql: "11.5"
+  postgresql: "11.6"
   apt:
     packages:
       - rabbitmq-server
