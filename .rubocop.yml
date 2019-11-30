@@ -5,7 +5,7 @@ Layout/IndentationWidth:
 Layout/Tab:
   Enabled: false
   IndentationWidth: 2
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
