@@ -2,14 +2,14 @@ Layout/EndOfLine:
   Enabled: false
 Layout/IndentationWidth:
   Width: 1
+Layout/LineLength:
+  Enabled: false
 Layout/Tab:
   Enabled: false
   IndentationWidth: 2
 Layout/TrailingEmptyLines:
   Enabled: false
 Metrics/BlockLength:
-  Enabled: false
-Metrics/LineLength:
   Enabled: false
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact

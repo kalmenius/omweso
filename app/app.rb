@@ -45,7 +45,7 @@ configure do
 	AMQP.start
 
 	# Finally, we register all controller classes.
-	Dir.glob('./app/controllers/*.rb').each do |file|
+	Dir.glob('./app/controllers/*.rb').sort.each do |file|
 		logger.info "Registering controller #{File.basename(file)}"
 		require file
 	end
