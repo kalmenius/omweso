@@ -14,9 +14,9 @@ module RSpecMixin
 end
 
 shared_examples_for 'a JSON endpoint' do |code = 200, block|
-	before do
+	let!(:json) do
 		instance_exec(&block)
-		@json = JSON.parse last_response.body
+		JSON.parse last_response.body
 	end
 
 	it "with HTTP #{code}" do
@@ -28,21 +28,19 @@ shared_examples_for 'a JSON endpoint' do |code = 200, block|
 	end
 
 	context 'with a request ID header' do
-		def request_id
+		def last_request_id
 			last_response.headers['x-request-id']
 		end
 
-		before do
-			@request_id = request_id
-		end
+		let!(:first_request_id) { last_request_id }
 
 		it 'that is present' do
-			expect(@request_id).not_to be_nil
+			expect(first_request_id).not_to be_nil
 		end
 
 		it 'that is distinct each time' do
 			instance_exec(&block)
-			expect(request_id).not_to eq @request_id
+			expect(last_request_id).not_to eq first_request_id
 		end
 	end
 end
