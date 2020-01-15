@@ -1,3 +1,3 @@
 # omweso
 
-[![Build Status](https://travis-ci.org/kalmenius/omweso.svg?branch=master)](https://travis-ci.org/kalmenius/omweso)
+[![Build Status](https://travis-ci.com/kalmenius/omweso.svg?branch=master)](https://travis-ci.com/kalmenius/omweso)
