@@ -4,7 +4,7 @@ GEM
     amq-protocol (2.3.0)
     ast (2.4.0)
     awesome_print (1.8.0)
-    backports (3.15.0)
+    backports (3.16.0)
     bunny (2.14.3)
       amq-protocol (~> 2.3, >= 2.3.0)
     diff-lcs (1.3)
