@@ -2,14 +2,12 @@ language: ruby
 rvm: 2.7.0
 env:
   - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
-  global:
-    - PGPORT=5433
 before_install:
   - gem install bundler
   - sudo apt-get update
   - sudo apt-get --yes remove postgresql\*
   - sudo apt-get install -y postgresql-12 postgresql-client-12
-  - sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
+  - sudo cp /etc/postgresql/{9.6,11,12}/main/pg_hba.conf
   - sudo service postgresql restart 12
 before_script:
   - psql --version
