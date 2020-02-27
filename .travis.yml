@@ -2,6 +2,8 @@ language: ruby
 rvm: 2.7.0
 env:
   - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
+  global:
+    - PGPORT=5433
 before_install:
   - gem install bundler
   - sudo apt-get update
