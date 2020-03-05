@@ -14,7 +14,7 @@ GEM
       ruby2_keywords (~> 0.0.1)
     newrelic_rpm (6.9.0.363)
     nio4r (2.5.2)
-    oj (3.10.3)
+    oj (3.10.5)
     ougai (1.8.2)
       oj (~> 3.4)
     parallel (1.19.1)
