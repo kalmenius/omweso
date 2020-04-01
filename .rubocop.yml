@@ -9,6 +9,10 @@ Layout/Tab:
   IndentationWidth: 2
 Layout/TrailingEmptyLines:
   Enabled: false
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
 Metrics/BlockLength:
   Enabled: false
 Style/ClassAndModuleChildren:
