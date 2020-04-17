@@ -37,11 +37,11 @@ configure do
 	set :logger, logger
 
 	logger.info 'Establishing database connection...'
-	DB = Sequel.connect(ENV['DATABASE_URL'] || settings.database, logger: logger.child(logger: 'sequel'))
+	DB = Sequel.connect(ENV['DATABASE_URL'] || settings.database, logger: logger.child({ logger: 'sequel' }))
 	Sequel::Model.plugin :json_serializer
 
 	logger.info 'Establishing AMQP connection...'
-	AMQP = Bunny.new(ENV['CLOUDAMQP_URL'] || nil, logger: logger.child(logger: 'bunny'))
+	AMQP = Bunny.new(ENV['CLOUDAMQP_URL'] || nil, logger: logger.child({ logger: 'bunny' }))
 	AMQP.start
 
 	# Finally, we register all controller classes.

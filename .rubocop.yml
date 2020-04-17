@@ -1,12 +1,14 @@
 Layout/EndOfLine:
   Enabled: false
+Layout/IndentationStyle:
+  EnforcedStyle: tabs
+  IndentationWidth: 2
 Layout/IndentationWidth:
   Width: 1
 Layout/LineLength:
   Enabled: false
-Layout/Tab:
-  Enabled: false
-  IndentationWidth: 2
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
 Layout/TrailingEmptyLines:
   Enabled: false
 Lint/RaiseException:
@@ -17,11 +19,13 @@ Metrics/BlockLength:
   Enabled: false
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+Style/ExponentialNotation:
+  Enabled: true
+Style/FrozenStringLiteralComment:
+  Enabled: false
 Style/HashEachMethods:
   Enabled: true
 Style/HashTransformKeys:
   Enabled: true
 Style/HashTransformValues:
   Enabled: true
-Style/FrozenStringLiteralComment:
-  Enabled: false

@@ -57,11 +57,11 @@ describe 'Omweso' do
 		end
 
 		[['GET requests', -> { get '/body' }, {}],
-		 ['POST requests using an empty body', -> { post '/body' }, {}],
-		 ['POST requests using a body of {}', -> { post '/body', '{}' }, {}],
-		 ['POST requests using a body of []', -> { post '/body', '[]' }, []],
-		 ['POST requests using a body of {"foo":"bar"}', -> { post '/body', '{"foo":"bar"}' }, { 'foo' => 'bar' }],
-		 ['POST requests using a body of {"foo":null}', -> { post '/body', '{"foo":null}' }, { 'foo' => nil }]]
+			['POST requests using an empty body', -> { post '/body' }, {}],
+			['POST requests using a body of {}', -> { post '/body', '{}' }, {}],
+			['POST requests using a body of []', -> { post '/body', '[]' }, []],
+			['POST requests using a body of {"foo":"bar"}', -> { post '/body', '{"foo":"bar"}' }, { 'foo' => 'bar' }],
+			['POST requests using a body of {"foo":null}', -> { post '/body', '{"foo":null}' }, { 'foo' => nil }]]
 			.each do |context, block, expected|
 			context "when making #{context}" do
 				include_examples 'a JSON endpoint', block
