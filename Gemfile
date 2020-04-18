@@ -16,7 +16,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 group :development do
-	gem 'awesome_print'
+	gem 'amazing_print'
 end
 
 group :test do
