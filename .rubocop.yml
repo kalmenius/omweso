@@ -1,3 +1,5 @@
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
 Layout/EndOfLine:
   Enabled: false
 Layout/IndentationStyle:
@@ -28,4 +30,6 @@ Style/HashEachMethods:
 Style/HashTransformKeys:
   Enabled: true
 Style/HashTransformValues:
+  Enabled: true
+Style/SlicingWithRange:
   Enabled: true
