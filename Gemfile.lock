@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    amazing_print (1.1.0)
+    amazing_print (1.2.0)
     amq-protocol (2.3.1)
     ast (2.4.0)
     backports (3.17.2)
@@ -32,7 +32,7 @@ GEM
       rack (>= 1.0, < 3)
     rainbow (3.0.0)
     rake (13.0.1)
-    regexp_parser (1.7.0)
+    regexp_parser (1.7.1)
     request_store (1.5.0)
       rack (>= 1.4)
     rexml (3.2.4)
@@ -49,7 +49,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.3)
-    rubocop (0.85.0)
+    rubocop (0.85.1)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
