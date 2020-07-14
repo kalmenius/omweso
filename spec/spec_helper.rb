@@ -3,7 +3,7 @@ require 'rspec'
 
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../app/app.rb'
+require_relative '../app/app'
 
 module RSpecMixin
 	include Rack::Test::Methods
