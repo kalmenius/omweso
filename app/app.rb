@@ -26,7 +26,7 @@ configure do
 	use RequestStore::Middleware
 	use Rack::RequestId, storage: RequestStore
 
-	logger = Ougai::Logger.new(STDOUT)
+	logger = Ougai::Logger.new($stdout)
 	logger.level = settings.log_level
 	logger.formatter = Ougai::Formatters::Readable.new if settings.pretty_logs
 	logger.before_log = ->(data) { data.merge!(rq) }
