@@ -1,9 +1,11 @@
 language: ruby
 rvm: 2.7.1
 env:
-  global:
-    - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
-    - PGPORT=5432
+  - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
+before_install:
+  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
+  - sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
+  - sudo service postgresql restart 12
 before_script:
   - psql --version
   - psql -c 'CREATE DATABASE omweso_test;' -U postgres
