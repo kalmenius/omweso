@@ -4,7 +4,7 @@ GEM
     amazing_print (1.2.1)
     amq-protocol (2.3.2)
     ast (2.4.1)
-    backports (3.18.1)
+    backports (3.18.2)
     bigdecimal (2.0.0)
     bunny (2.16.1)
       amq-protocol (~> 2.3, >= 2.3.1)
@@ -85,6 +85,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
   x86_64-linux
 
 DEPENDENCIES
