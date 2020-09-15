@@ -36,6 +36,7 @@ configure do
 	}
 	set :logger, logger
 
+	# rubocop:disable Lint/ConstantDefinitionInBlock
 	logger.info 'Establishing database connection...'
 	DB = Sequel.connect(ENV['DATABASE_URL'] || settings.database, logger: logger.child({ logger: 'sequel' }))
 	Sequel::Model.plugin :json_serializer
@@ -43,6 +44,7 @@ configure do
 	logger.info 'Establishing AMQP connection...'
 	AMQP = Bunny.new(ENV['CLOUDAMQP_URL'] || nil, logger: logger.child({ logger: 'bunny' }))
 	AMQP.start
+	# rubocop:enable Lint/ConstantDefinitionInBlock
 
 	# Finally, we register all controller classes.
 	Dir.glob('./app/controllers/*.rb').sort.each do |file|
