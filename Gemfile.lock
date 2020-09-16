@@ -11,7 +11,7 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     newrelic_rpm (6.12.0.367)
-    nio4r (2.5.3)
+    nio4r (2.5.4)
     oj (3.10.14)
     ougai (1.8.5)
       oj (~> 3.10)
