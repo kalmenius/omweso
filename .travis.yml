@@ -1,5 +1,7 @@
 language: ruby
 rvm: 2.7.1
+dist: xenial
+os: linux
 env:
   - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
 before_install:
@@ -17,7 +19,7 @@ script:
   - bundle exec rake
 deploy:
   provider: heroku
-  skip_cleanup: true
+  strategy: api
   api_key:
     secure: ZneFkLYgh4/gLZL444EgVMDMVCgSM+yhBSkOdEH6exuSEGOift8SNuSKL2EVkdDiNkBqjc76F5efKB6ZzHKKB7lRID4grFRMixJAl0m/G68+y3TVtTJ6k1OtqEXu6d3S8PDY1YZr2+cnYcAteSbfwzTyRtmiw0xoxuFnAajF2XtzOapAEi3x5vVtPvYb8Z9XRP7W0cZDW8S9L2zmo2zFmLhFmW3kzD4cKXYQiQ/KaXCP+HSM/GB5BDdcw5+Up6bbHu5zZNxcCfSuW9ySKXc37Z3TnFIHBvRRfHGuVgbvU1i6Lffg5RXtWzozAWNr8UPXmAOeMBOShFRbxcLbaBdlaTJSZKvNPb4oMrnMRW5/Bcu/OtpOdzmR8YAVqgUcR/efPjtxVbQst9BEdBzbY1FK6sPczPxm4gcy+HOL1dKTKQQNktWtIe9nnr2ZidnhJ8cD+DSwcFY5VO/kedF9wEo0TRKIHoKgbaYCeSH56UVTv9w8wPAxLdhZifMNrWyC2+qJhxKzjMqUHMZAr5l8LGOOqjAZOMX/u3++mbqcsOLIGZEIELKKjmbtwBuyabyarKWLSdcI+8v5I325VHqXIbGKlXROoYRhQj6yM7nq6ZidF/A0Yw6J1Iaxx0ooAJHGF7LOiOZW2Lxt0ZfOsn28GmqNNmK5xgFb3+1rzPoKKeY+lJg=
 notifications:
