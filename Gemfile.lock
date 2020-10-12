@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    amazing_print (1.2.1)
+    amazing_print (1.2.2)
     amq-protocol (2.3.2)
     ast (2.4.1)
     bunny (2.17.0)
