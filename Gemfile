@@ -22,6 +22,7 @@ end
 group :test do
 	gem 'rack-test'
 	gem 'rubocop'
+	gem 'simplecov'
 end
 
 group :production do
