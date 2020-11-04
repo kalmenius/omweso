@@ -125,3 +125,8 @@ get '/info' do
 		sha: ENV['HEROKU_SLUG_COMMIT']
 	}
 end
+
+get '/test' do
+	logger.error 'this record has verses'
+	{ foo: 'bar' }
+end
