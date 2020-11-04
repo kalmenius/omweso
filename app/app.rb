@@ -64,13 +64,6 @@ configure :test do
 	end
 end
 
-# Monkey-patching Ougai for more sensible log levels.
-module Ougai::Formatters::ForJson
-	def to_level(severity)
-		severity
-	end
-end
-
 # An error for request bodies that are not valid JSON.
 class BadRequestBody < StandardError
 	def http_status
