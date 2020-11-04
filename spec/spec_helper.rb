@@ -1,9 +1,7 @@
 require 'rack/test'
 require 'rspec'
 require 'simplecov'
-require 'simplecov_json_formatter'
 
-SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 SimpleCov.start
 
 ENV['RACK_ENV'] = 'test'

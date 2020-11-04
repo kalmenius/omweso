@@ -22,8 +22,7 @@ end
 group :test do
 	gem 'rack-test'
 	gem 'rubocop'
-	gem 'simplecov'
-	gem 'simplecov_json_formatter'
+	gem 'simplecov', '~> 0.10', '< 0.18'
 end
 
 group :production do
