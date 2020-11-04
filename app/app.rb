@@ -127,6 +127,11 @@ get '/info' do
 end
 
 get '/test' do
-	logger.error 'this record has verses'
+	logger.trace 'alpha'
+	logger.debug 'beta'
+	logger.info 'gamma'
+	logger.warn 'delta'
+	logger.error 'epsilon'
+	logger.fatal 'zeta'
 	{ foo: 'bar' }
 end
