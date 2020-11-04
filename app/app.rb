@@ -18,6 +18,17 @@ def rq
 	RequestStore.store
 end
 
+module Ougai
+	module Formatters
+		# Monkey-patching Ougai for more sensible log levels.
+		module ForJson
+			def to_level(severity)
+				severity
+			end
+		end
+	end
+end
+
 # Adjust global Sinatra settings.
 configure do
 	disable :dump_errors
@@ -28,10 +39,10 @@ configure do
 	use RequestStore::Middleware
 	use Rack::RequestId, storage: RequestStore
 
-	logger = Ougai::Logger.new($stdout)
+	logger = Ougai::Logger.new $stdout
 	logger.level = settings.log_level
 	logger.formatter = Ougai::Formatters::Readable.new if settings.pretty_logs
-	logger.before_log = ->(data) { data.merge!(rq) }
+	logger.before_log = ->(data) { data.merge! rq }
 	logger.with_fields = {
 		environment: Sinatra::Application.environment,
 		name: settings.name

@@ -3,6 +3,7 @@
 require 'rack/test'
 require 'rspec'
 require 'simplecov'
+require 'stringio'
 
 SimpleCov.start
 

@@ -74,4 +74,18 @@ describe 'Omweso' do
 			end
 		end
 	end
+
+	context 'should use standard log levels in structured logs' do
+		let(:buffer) { StringIO.new }
+		let(:logger) { Ougai::Logger.new(buffer, level: :trace) }
+
+		%i[trace debug info warn error fatal].each do |level|
+			log_level = level.to_s.upcase
+
+			it "for level #{log_level}" do
+				logger.send level, 'foobar'
+				expect(JSON.parse(buffer.string)['level']).to eq log_level
+			end
+		end
+	end
 end
