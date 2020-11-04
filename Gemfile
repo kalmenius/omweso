@@ -23,6 +23,7 @@ group :test do
 	gem 'rack-test'
 	gem 'rubocop'
 	gem 'simplecov'
+	gem 'simplecov_json_formatter'
 end
 
 group :production do
