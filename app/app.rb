@@ -136,13 +136,3 @@ get '/info' do
 		sha: ENV['HEROKU_SLUG_COMMIT']
 	}
 end
-
-get '/test' do
-	logger.trace 'alpha'
-	logger.debug 'beta'
-	logger.info 'gamma'
-	logger.warn 'delta'
-	logger.error 'epsilon'
-	logger.fatal 'zeta'
-	{ foo: 'bar' }
-end
