@@ -4,6 +4,8 @@ dist: xenial
 os: linux
 env:
   - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
+global:
+  - CC_TEST_REPORTER_ID=13fa9fad77cb709c64ca217be7ada6dde8635bd5fd527754c6de610471a829bf
 before_install:
   - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
   - sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
@@ -13,10 +15,15 @@ before_script:
   - psql -c 'CREATE DATABASE omweso_test;' -U postgres
   - psql -c "CREATE USER omweso WITH PASSWORD 'mancala';" -U postgres
   - psql -c "GRANT ALL ON DATABASE omweso_test TO omweso;" -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - bundle exec rubocop
   - bundle exec rake sequel:migrate
   - bundle exec rake
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
   provider: heroku
   strategy: api
