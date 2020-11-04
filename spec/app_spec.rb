@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Omweso' do
 	context 'should handle /info requests' do
 		include_examples 'a JSON endpoint', -> { get '/info' }

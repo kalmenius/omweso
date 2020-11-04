@@ -1,19 +1,9 @@
 AllCops:
   NewCops: enable
-Layout/EndOfLine:
-  Enabled: false
 Layout/IndentationStyle:
   EnforcedStyle: tabs
   IndentationWidth: 2
 Layout/IndentationWidth:
   Width: 1
-Layout/LineLength:
-  Enabled: false
-Layout/TrailingEmptyLines:
-  Enabled: false
 Metrics/BlockLength:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
-Style/FrozenStringLiteralComment:
   Enabled: false
