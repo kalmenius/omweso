@@ -17,7 +17,7 @@ GEM
     oj (3.10.15)
     ougai (1.8.5)
       oj (~> 3.10)
-    parallel (1.19.2)
+    parallel (1.20.0)
     parser (2.7.2.0)
       ast (~> 2.4.1)
     pg (1.2.3)
@@ -88,6 +88,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
   x86_64-linux
 
 DEPENDENCIES
