@@ -13,7 +13,7 @@ describe 'Omweso' do
 		end
 
 		it 'with the database version' do
-			expect(json['database']).to start_with 'PostgreSQL 12.4'
+			expect(json['database']).to start_with 'PostgreSQL 12.5'
 		end
 
 		context 'with information about the AMQP broker' do
