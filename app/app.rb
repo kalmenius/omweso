@@ -133,6 +133,6 @@ get '/info' do
 		database: DB['SELECT version()'].first[:version],
 		environment: Sinatra::Application.environment,
 		name: settings.name,
-		sha: ENV['HEROKU_SLUG_COMMIT']
+		sha: ENV['HEROKU_SLUG_COMMIT'] || `git rev-parse HEAD`.strip
 	}
 end
