@@ -27,8 +27,6 @@
     <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
     <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
     <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-    <method v="2">
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Migrate To Latest [Test]" run_configuration_type="RakeRunConfigurationType" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>

@@ -15,8 +15,6 @@
     <RACK_CONFIG_SETTINGS_ID NAME="CONFIG_FILE" VALUE="config.ru" />
     <RACK_CONFIG_SETTINGS_ID NAME="RACK_SERVER_TYPE" VALUE="default" />
     <RACK_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
-    <method v="2">
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Migrate To Latest [Dev]" run_configuration_type="RakeRunConfigurationType" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>
