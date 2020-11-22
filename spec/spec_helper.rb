@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'hash_dot'
 require 'rack/test'
 require 'rspec'
 require 'simplecov'
@@ -9,7 +10,7 @@ SimpleCov.start
 
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../app/app'
+require_relative '../backend/app'
 
 module RSpecMixin
 	include Rack::Test::Methods

@@ -16,12 +16,14 @@ gem 'sequel'
 gem 'sequel-rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'sinatra-param'
 
 group :development do
 	gem 'amazing_print'
 end
 
 group :test do
+	gem 'hash_dot'
 	gem 'rack-test'
 	gem 'rubocop'
 	gem 'simplecov', '~> 0.10', '< 0.18'

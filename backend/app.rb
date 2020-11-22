@@ -4,6 +4,7 @@ require 'sinatra'
 require 'sinatra/config_file'
 require 'sinatra/custom_logger'
 require 'sinatra/multi_route'
+require 'sinatra/param'
 require 'sinatra/json'
 require 'ougai'
 require 'rack-request-id'
@@ -12,6 +13,7 @@ require 'sequel'
 require 'bunny'
 
 config_file File.expand_path('../config/settings.yml', __dir__)
+helpers Sinatra::Param
 
 # An alias for request-scoped data storage.
 def rq
@@ -29,12 +31,24 @@ module Ougai
 	end
 end
 
+module Sinatra
+	module Param
+		# Monkey-patching sinatra-param to enforce HTTP 400 on thrown parameter errors.
+		class InvalidParameterError
+			def http_status
+				400
+			end
+		end
+	end
+end
+
 # Adjust global Sinatra settings.
 configure do
 	disable :dump_errors
 	disable :logging
 	disable :raise_errors
 	disable :show_exceptions
+	enable :raise_sinatra_param_exceptions
 
 	use RequestStore::Middleware
 	use Rack::RequestId, storage: RequestStore
@@ -53,6 +67,7 @@ configure do
 	logger.info 'Establishing database connection...'
 	DB = Sequel.connect(ENV['DATABASE_URL'] || settings.database, logger: logger.child({ logger: 'sequel' }))
 	Sequel::Model.plugin :json_serializer
+	Sequel.default_timezone = :utc
 
 	logger.info 'Establishing AMQP connection...'
 	AMQP = Bunny.new(ENV['CLOUDAMQP_URL'] || nil, logger: logger.child({ logger: 'bunny' }))
@@ -60,7 +75,7 @@ configure do
 	# rubocop:enable Lint/ConstantDefinitionInBlock
 
 	# Finally, we register all controller classes.
-	Dir.glob('./app/controllers/*.rb').sort.each do |file|
+	Dir.glob('./backend/controllers/*.rb').sort.each do |file|
 		logger.info "Registering controller #{File.basename(file)}"
 		require file
 	end
