@@ -20,10 +20,28 @@ module RSpecMixin
 	end
 end
 
-shared_examples_for 'a JSON endpoint' do |code = 200, block|
+module Sequel
+	class Model
+		def for_specs
+			values.transform_values do |value|
+				if value.is_a? Time
+					value.to_s
+				else
+					value
+				end
+			end
+		end
+	end
+end
+
+shared_examples 'a JSON endpoint' do |code = 200, block|
+	def last_response_json
+		JSON.parse(last_response.body, symbolize_names: true)
+	end
+
 	let!(:json) do
 		instance_exec(&block)
-		JSON.parse last_response.body
+		last_response_json
 	end
 
 	it "with HTTP #{code}" do
