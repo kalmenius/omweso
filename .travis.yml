@@ -1,6 +1,6 @@
 language: ruby
 cache: bundler
-rvm: 3.0.0
+rvm: 2.7.2
 dist: xenial
 os: linux
 env:
