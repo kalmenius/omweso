@@ -16,7 +16,7 @@ module Ougai
   # TODO: remove me upon resolution of https://github.com/tilfin/ougai/issues/112
   # Monkey-patching Ougai to allow use of child loggers inside Bunny.
   class ChildLogger
-    def add(severity, message) = log(severity, message, nil, nil, nil)
+    def add(severity, message = nil) = log(severity, block_given? ? yield : message, nil, nil, nil)
   end
 
   module Formatters
