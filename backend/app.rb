@@ -12,27 +12,17 @@ require 'request_store'
 require 'sequel'
 require 'bunny'
 
-# A mixin for errors that should report HTTP 400.
-module HTTP400
-  def http_status
-    400
-  end
-end
-
-# A mixin for errors that should report HTTP 404.
-module HTTP404
-  def http_status
-    404
-  end
-end
-
 module Ougai
+  # TODO: remove me upon resolution of https://github.com/tilfin/ougai/issues/112
+  # Monkey-patching Ougai to allow use of child loggers inside Bunny.
+  class ChildLogger
+    def add(severity, message) = log(severity, message, nil, nil, nil)
+  end
+
   module Formatters
     # Monkey-patching Ougai for more sensible log levels.
     module ForJson
-      def to_level(severity)
-        severity
-      end
+      def to_level(severity) = severity
     end
   end
 end
@@ -41,15 +31,13 @@ module Sinatra
   module Param
     # Monkey-patching sinatra-param to enforce HTTP 400 on thrown parameter errors.
     class InvalidParameterError
-      include HTTP400
+      def http_status = 400
     end
   end
 end
 
 # An alias for request-scoped data storage.
-def rq
-  RequestStore.store
-end
+def rq = RequestStore.store
 
 # Adjust global Sinatra settings.
 config_file File.expand_path('../config/settings.yml', __dir__)
@@ -98,7 +86,7 @@ end
 
 # An error for request bodies that are not valid JSON.
 class BadRequestBody < StandardError
-  include HTTP400
+  def http_status = 400
 end
 
 # Store some request-scoped information, store the request body (complaining if not JSON), and log.

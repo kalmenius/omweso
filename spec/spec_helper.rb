@@ -15,9 +15,7 @@ require_relative '../backend/app'
 module RSpecMixin
   include Rack::Test::Methods
 
-  def app
-    Sinatra::Application
-  end
+  def app = Sinatra::Application
 end
 
 module Sequel
@@ -35,9 +33,7 @@ module Sequel
 end
 
 shared_examples 'a JSON endpoint' do |code = 200, block|
-  def last_response_json
-    JSON.parse(last_response.body, symbolize_names: true)
-  end
+  def last_response_json = JSON.parse(last_response.body, symbolize_names: true)
 
   let!(:json) do
     instance_exec(&block)
@@ -53,9 +49,7 @@ shared_examples 'a JSON endpoint' do |code = 200, block|
   end
 
   context 'with a request ID header' do
-    def last_request_id
-      last_response.headers['x-request-id']
-    end
+    def last_request_id = last_response.headers['x-request-id']
 
     let!(:first_request_id) { last_request_id }
 

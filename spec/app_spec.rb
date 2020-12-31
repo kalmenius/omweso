@@ -54,7 +54,7 @@ describe 'Omweso' do
       include_examples 'a JSON endpoint', 400, -> { post '/body', '{]' }
 
       it 'with some exception information' do
-        expect(json[:error]).to eq "#<BadRequestBody: 783: unexpected token at '{]'>"
+        expect(json[:error]).to eq "#<BadRequestBody: 809: unexpected token at '{]'>"
       end
     end
 
