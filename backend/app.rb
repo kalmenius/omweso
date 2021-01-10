@@ -13,12 +13,6 @@ require 'sequel'
 require 'bunny'
 
 module Ougai
-  # TODO: remove me upon resolution of https://github.com/tilfin/ougai/issues/112
-  # Monkey-patching Ougai to allow use of child loggers inside Bunny.
-  class ChildLogger
-    def add(severity, message = nil) = log(severity, block_given? ? yield : message, nil, nil, nil)
-  end
-
   module Formatters
     # Monkey-patching Ougai for more sensible log levels.
     module ForJson
@@ -68,7 +62,7 @@ AMQP = Bunny.new(ENV['CLOUDAMQP_URL'] || nil, logger: logger.child({ logger: 'bu
 AMQP.start
 
 # Finally, we register all controller classes.
-Dir.glob('./backend/controllers/*.rb').sort.each do |file|
+Dir.glob('./backend/controllers/*.rb').each do |file|
   logger.info "Registering controller #{File.basename(file)}"
   require file
 end
