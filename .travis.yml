@@ -8,9 +8,9 @@ env:
     - CC_TEST_REPORTER_ID=13fa9fad77cb709c64ca217be7ada6dde8635bd5fd527754c6de610471a829bf
     - DATABASE_URL=postgres://omweso:mancala@localhost/omweso_test
 before_install:
-  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
-  - sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
-  - sudo service postgresql restart 12
+  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/13/main/postgresql.conf
+  - sudo cp /etc/postgresql/{9.6,13}/main/pg_hba.conf
+  - sudo service postgresql restart 13
 before_script:
   - psql --version
   - psql -c 'CREATE DATABASE omweso_test;' -U postgres
@@ -38,9 +38,9 @@ services:
   - postgresql
   - rabbitmq
 addons:
-  postgresql: "12.4"
+  postgresql: "13.1"
   apt:
     packages:
-      - postgresql-12
-      - postgresql-client-12
+      - postgresql-13
+      - postgresql-client-13
       - rabbitmq-server
