@@ -17,6 +17,7 @@ gem "sequel-rake"
 gem "sinatra"
 gem "sinatra-contrib"
 gem "sinatra-param"
+gem "standard"
 
 group :development do
   gem "amazing_print"
@@ -26,7 +27,6 @@ group :test do
   gem "hash_dot"
   gem "rack-test"
   gem "simplecov"
-  gem "standard"
 end
 
 group :production do
