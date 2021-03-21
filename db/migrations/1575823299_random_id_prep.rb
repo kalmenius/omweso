@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'pg_random_id'
+require "pg_random_id"
 
 Sequel.migration do
   up do

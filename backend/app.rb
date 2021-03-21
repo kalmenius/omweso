@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'sinatra'
-require 'sinatra/config_file'
-require 'sinatra/custom_logger'
-require 'sinatra/multi_route'
-require 'sinatra/param'
-require 'sinatra/json'
-require 'ougai'
-require 'rack-request-id'
-require 'request_store'
-require 'sequel'
-require 'bunny'
+require "sinatra"
+require "sinatra/config_file"
+require "sinatra/custom_logger"
+require "sinatra/multi_route"
+require "sinatra/param"
+require "sinatra/json"
+require "ougai"
+require "rack-request-id"
+require "request_store"
+require "sequel"
+require "bunny"
 
 module Ougai
   module Formatters
@@ -34,7 +34,7 @@ end
 def rq = RequestStore.store
 
 # Adjust global Sinatra settings.
-config_file File.expand_path('../config/settings.yml', __dir__)
+config_file File.expand_path("../config/settings.yml", __dir__)
 helpers Sinatra::Param
 disable :dump_errors, :logging, :raise_errors, :show_exceptions
 enable :raise_sinatra_param_exceptions
@@ -52,28 +52,28 @@ logger.with_fields = {
 }
 set :logger, logger
 
-logger.info 'Establishing database connection...'
-DB = Sequel.connect(ENV['DATABASE_URL'] || settings.database, logger: logger.child({ logger: 'sequel' }))
+logger.info "Establishing database connection..."
+DB = Sequel.connect(ENV["DATABASE_URL"] || settings.database, logger: logger.child({logger: "sequel"}))
 Sequel::Model.plugin :json_serializer
 Sequel.default_timezone = :utc
 
-logger.info 'Establishing AMQP connection...'
-AMQP = Bunny.new(ENV['CLOUDAMQP_URL'] || nil, logger: logger.child({ logger: 'bunny' }))
+logger.info "Establishing AMQP connection..."
+AMQP = Bunny.new(ENV["CLOUDAMQP_URL"] || nil, logger: logger.child({logger: "bunny"}))
 AMQP.start
 
 # Finally, we register all controller classes.
-Dir.glob('./backend/controllers/*.rb').each do |file|
+Dir.glob("./backend/controllers/*.rb").each do |file|
   logger.info "Registering controller #{File.basename(file)}"
   require file
 end
 
 # Establish some endpoints only needed by the specs.
 configure :test do
-  get '/error' do
-    raise 'xyzzy'
+  get "/error" do
+    raise "xyzzy"
   end
 
-  route :get, :post, '/body' do
+  route :get, :post, "/body" do
     @request_body
   end
 end
@@ -113,25 +113,25 @@ end
 
 # Handle bad routes and uncaught errors nicely.
 error 400..599 do
-  err = env['sinatra.error']
+  err = env["sinatra.error"]
   route_description = "#{rq[:verb]} '#{rq[:path]}'"
 
   if err.is_a? Sinatra::NotFound
-    { error: "Route not found: #{route_description}" }
+    {error: "Route not found: #{route_description}"}
   else
     description = err.inspect
     logger.error "Caught error during #{route_description}: #{description}", err
-    { error: description }
+    {error: description}
   end
 end
 
 # An endpoint to inspect application state externally.
-get '/info' do
+get "/info" do
   {
     amqp: AMQP.server_properties.merge(status: AMQP.status),
-    database: DB['SELECT version()'].first[:version],
+    database: DB["SELECT version()"].first[:version],
     environment: Sinatra::Application.environment,
     name: settings.name,
-    sha: ENV['HEROKU_SLUG_COMMIT'] || `git rev-parse HEAD`.strip
+    sha: ENV["HEROKU_SLUG_COMMIT"] || `git rev-parse HEAD`.strip
   }
 end

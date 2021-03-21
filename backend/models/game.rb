@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'sequel'
+require "sequel"
 
 # A nice game of Omweso.
 class Game < Sequel::Model

@@ -20,7 +20,7 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - bundle exec rubocop
+  - bundle exec rake standard
   - bundle exec rake sequel:migrate
   - bundle exec rake
 after_script:
