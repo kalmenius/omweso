@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Cleanup [Test]" type="RakeRunConfigurationType" factoryName="Rake">
+  <configuration default="false" name="Game Cleanup [Dev]" type="RakeRunConfigurationType" factoryName="Rake">
     <module name="omweso" />
     <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
     <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
@@ -7,7 +7,7 @@
     <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
     <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
     <envs>
-      <env name="DATABASE_URL" value="postgres://omweso:mancala@localhost/omweso_test" />
+      <env name="DATABASE_URL" value="postgres://omweso:mancala@localhost/omweso_dev" />
     </envs>
     <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
     <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
