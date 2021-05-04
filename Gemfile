@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-ruby "3.0.0"
+ruby "3.0.1"
 source "https://rubygems.org"
 
 gem "bunny"
 gem "ougai"
-gem "pg"
+gem "pg", git: "https://github.com/ged/ruby-pg.git"
 gem "pg_random_id"
 gem "puma"
 gem "rack-request-id"
