@@ -40,7 +40,7 @@ services:
   - postgresql
   - rabbitmq
 addons:
-  postgresql: "13.2"
+  postgresql: "13.3"
   apt:
     packages:
       - postgresql-13
