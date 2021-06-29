@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/ged/ruby-pg.git
-  revision: 63ae613dfde1a4bbf1ec621c931fd3e47a1778a9
+  revision: d65fbdbe9240004403bd03381ea6c905bcf5cfdf
   specs:
-    pg (1.3.0.pre20210319181010)
+    pg (1.2.3)
 
 GEM
   remote: https://rubygems.org/
